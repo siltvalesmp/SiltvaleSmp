@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>History of Siltvale — Siltvale SMP</title>
+
+    <style>
+
+        :root {
+            --paper: #d8c9a8;
+            --paper-dark: #b9a984;
+            --ink: #25231f;
+            --faded: #6f695b;
+            --line: #91866f;
+            --white: #e5d9bc;
+            --red: #8a4a42;
+            --yellow: #b6a05d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(37,35,31,0.025) 0px,
+                    rgba(37,35,31,0.025) 1px,
+                    transparent 1px,
+                    transparent 4px
+                ),
+                var(--paper);
+
+            color: var(--ink);
+
+            font-family:
+                "Courier New",
+                Courier,
+                monospace;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            width: 100%;
+            height: 58px;
+
+            border-bottom: 3px solid var(--ink);
+
+            padding: 10px 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: var(--paper-dark);
+
+            position: relative;
+            z-index: 100;
+        }
+
+        .site-id {
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .discord-button {
+            text-decoration: none;
+
+            background: var(--ink);
+            color: var(--paper);
+
+            border: 2px solid var(--ink);
+
+            padding: 8px 13px;
+
+            font-family:
+                "Courier New",
+                Courier,
+                monospace;
+
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+
+            transition: 0.15s ease;
+        }
+
+        .discord-button:hover {
+            background: var(--white);
+            color: var(--ink);
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =========================
+           MENU BUTTON
+        ========================= */
+
+        .menu-button {
+            position: fixed;
+
+            top: 10px;
+            right: 155px;
+
+            z-index: 1000;
+
+            background: var(--ink);
+            color: var(--paper);
+
+            border: 2px solid var(--ink);
+
+            padding: 8px 13px;
+
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.15s ease;
+        }
+
+        .menu-button:hover {
+            background: var(--white);
+            color: var(--ink);
+        }
+
+        .menu-button.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+
+        /* =========================
+           FULLSCREEN MENU
+        ========================= */
+
+        .menu-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 900;
+
+            background: #c2b28e;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition:
+                opacity 0.25s ease,
+                visibility 0.25s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-inner {
+            width: 92%;
+            height: 82vh;
+
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+
+            position: relative;
+        }
+
+        .close-menu {
+            position: absolute;
+
+            right: 0;
+            top: -45px;
+
+            background: transparent;
+            color: var(--ink);
+
+            border: 1px solid var(--ink);
+
+            padding: 7px 11px;
+
+            font-family:
+                "Courier New",
+                Courier,
+                monospace;
+
+            font-size: 10px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.15s ease;
+        }
+
+        .close-menu:hover {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        .menu-top {
+            position: absolute;
+
+            left: 0;
+            top: -45px;
+
+            font-size: 10px;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .menu-folder {
+            height: 100%;
+            width: 13%;
+
+            min-width: 90px;
+            max-width: 170px;
+
+            border-left: 2px solid var(--ink);
+            border-right: 2px solid var(--ink);
+
+            text-decoration: none;
+            color: var(--ink);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+            overflow: hidden;
+
+            transition:
+                width 0.25s ease,
+                transform 0.25s ease,
+                filter 0.25s ease,
+                background 0.25s ease;
+
+            box-shadow:
+                -5px 0 0 rgba(37,35,31,0.08);
+        }
+
+        .menu-folder:nth-of-type(1) {
+            background: #d8c9a8;
+        }
+
+        .menu-folder:nth-of-type(2) {
+            background: #eee4cb;
+        }
+
+        .menu-folder:nth-of-type(3) {
+            background: #9d9d91;
+        }
+
+        .menu-folder:nth-of-type(4) {
+            background: #b69b78;
+        }
+
+        .menu-folder:nth-of-type(5) {
+            background: #e0cba7;
+        }
+
+        .menu-folder:nth-of-type(6) {
+            background: #78766d;
+            color: #eee4cb;
+        }
+
+        .menu-folder:nth-of-type(7) {
+            background: #a8a88d;
+        }
+
+        .menu-folder::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 55%;
+            height: 32px;
+
+            border-right: 2px solid var(--ink);
+            border-bottom: 2px solid var(--ink);
+
+            background: inherit;
+        }
+
+        .menu-folder::after {
+            content: "";
+
+            position: absolute;
+
+            width: 65%;
+            height: 1px;
+
+            background: currentColor;
+
+            opacity: 0.35;
+
+            bottom: 18%;
+            left: 17%;
+        }
+
+        .folder-content {
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            height: 100%;
+            width: 100%;
+
+            position: relative;
+            z-index: 2;
+
+            transition: transform 0.25s ease;
+        }
+
+        .folder-number {
+            font-size: 9px;
+            letter-spacing: 2px;
+
+            position: absolute;
+
+            top: 55px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            white-space: nowrap;
+        }
+
+        .folder-name {
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: clamp(25px, 3vw, 43px);
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+
+            white-space: nowrap;
+
+            transition: 0.25s ease;
+        }
+
+        .folder-small {
+            position: absolute;
+
+            bottom: 45px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            font-size: 8px;
+            letter-spacing: 1px;
+
+            white-space: nowrap;
+        }
+
+        .menu-folder:hover {
+            width: 21%;
+
+            transform: translateY(-10px);
+
+            filter: contrast(1.05);
+
+            z-index: 10;
+
+            box-shadow:
+                -8px 0 0 rgba(37,35,31,0.12),
+                8px 0 0 rgba(37,35,31,0.08);
+        }
+
+        .menu-folder:hover .folder-content {
+            transform: scale(1.04);
+        }
+
+        .menu-folder:hover .folder-name {
+            letter-spacing: 4px;
+        }
+
+        .menu-folder:hover::before {
+            height: 40px;
+        }
+
+
+        /* =========================
+           HISTORY PAGE
+        ========================= */
+
+        .history-page {
+            width: min(1150px, 92%);
+
+            margin: 0 auto;
+
+            padding: 70px 0 90px;
+        }
+
+
+        /* INTRO */
+
+        .history-header {
+            border-bottom: 3px solid var(--ink);
+
+            padding-bottom: 35px;
+
+            margin-bottom: 35px;
+
+            position: relative;
+        }
+
+        .archive-label {
+            font-size: 10px;
+
+            letter-spacing: 3px;
+
+            color: var(--faded);
+
+            margin-bottom: 12px;
+        }
+
+        .history-header h1 {
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: clamp(42px, 7vw, 82px);
+
+            line-height: 0.95;
+
+            letter-spacing: -2px;
+
+            margin-bottom: 20px;
+        }
+
+        .history-header p {
+            max-width: 700px;
+
+            color: var(--faded);
+
+            font-size: 12px;
+        }
+
+
+        /* =========================
+           LEGEND STRIP
+        ========================= */
+
+        .legend {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            border: 2px solid var(--ink);
+
+            margin-bottom: 55px;
+        }
+
+        .legend-item {
+            min-height: 130px;
+
+            padding: 20px;
+
+            border-right: 1px solid var(--line);
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: space-between;
+        }
+
+        .legend-item:last-child {
+            border-right: none;
+        }
+
+        .legend-number {
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            color: var(--faded);
+        }
+
+        .legend-title {
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 21px;
+
+            font-weight: bold;
+        }
+
+        .legend-text {
+            font-size: 10px;
+
+            color: var(--faded);
+        }
+
+
+        /* =========================
+           TIMELINE
+        ========================= */
+
+        .timeline-title {
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+
+            margin-bottom: 25px;
+        }
+
+        .timeline-title span {
+            font-size: 10px;
+
+            letter-spacing: 3px;
+
+            white-space: nowrap;
+        }
+
+        .timeline-title::after {
+            content: "";
+
+            height: 1px;
+
+            background: var(--line);
+
+            flex: 1;
+        }
+
+
+        .history-block {
+            display: grid;
+
+            grid-template-columns:
+                170px 1fr;
+
+            border-top: 2px solid var(--ink);
+        }
+
+        .history-date {
+            padding: 30px 20px 30px 0;
+
+            border-right: 1px solid var(--line);
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            color: var(--faded);
+        }
+
+        .history-content {
+            padding: 30px 0 45px 35px;
+        }
+
+        .history-content h2 {
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: clamp(28px, 4vw, 46px);
+
+            line-height: 1;
+
+            margin-bottom: 18px;
+        }
+
+        .history-content h3 {
+            font-size: 11px;
+
+            letter-spacing: 2px;
+
+            margin-top: 30px;
+            margin-bottom: 10px;
+
+            color: var(--red);
+        }
+
+        .history-content p {
+            max-width: 780px;
+
+            font-size: 12px;
+
+            line-height: 1.9;
+
+            margin-bottom: 16px;
+        }
+
+
+        /* =========================
+           QUOTE
+        ========================= */
+
+        .lore-quote {
+            margin: 30px 0;
+
+            padding: 25px 30px;
+
+            border-left: 5px solid var(--red);
+
+            background: rgba(138,74,66,0.08);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: clamp(20px, 3vw, 30px);
+
+            line-height: 1.35;
+        }
+
+        .quote-note {
+            display: block;
+
+            margin-top: 12px;
+
+            font-family:
+                "Courier New",
+                Courier,
+                monospace;
+
+            font-size: 9px;
+
+            letter-spacing: 1px;
+
+            color: var(--faded);
+        }
+
+
+        /* =========================
+           SILT / WRAITH CARDS
+        ========================= */
+
+        .lore-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 20px;
+
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .lore-card {
+            border: 2px solid var(--ink);
+
+            padding: 25px;
+
+            min-height: 230px;
+
+            position: relative;
+
+            background: rgba(229,217,188,0.35);
+        }
+
+        .lore-card:nth-child(2) {
+            background: rgba(120,118,109,0.13);
+        }
+
+        .card-label {
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            color: var(--faded);
+
+            margin-bottom: 20px;
+        }
+
+        .lore-card h3 {
+            margin: 0 0 12px;
+
+            color: var(--ink);
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: 27px;
+        }
+
+        .lore-card p {
+            font-size: 11px;
+
+            line-height: 1.8;
+
+            margin: 0;
+        }
+
+        .card-symbol {
+            position: absolute;
+
+            right: 20px;
+            top: 15px;
+
+            font-family:
+                Georgia,
+                serif;
+
+            font-size: 30px;
+
+            opacity: 0.35;
+        }
+
+
+        /* =========================
+           SURVIVAL SECTION
+        ========================= */
+
+        .survival {
+            margin-top: 20px;
+
+            padding: 35px;
+
+            border: 2px solid var(--ink);
+
+            background: var(--paper-dark);
+
+            position: relative;
+        }
+
+        .survival::before {
+            content: "ARCHIVED TESTIMONY";
+
+            position: absolute;
+
+            top: -10px;
+            left: 20px;
+
+            padding: 2px 8px;
+
+            background: var(--paper);
+
+            border: 1px solid var(--ink);
+
+            font-size: 8px;
+
+            letter-spacing: 2px;
+        }
+
+        .survival p {
+            max-width: 800px;
+
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: clamp(18px, 2.5vw, 25px);
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           FINAL QUESTION
+        ========================= */
+
+        .ending {
+            margin-top: 65px;
+
+            padding: 55px 20px;
+
+            text-align: center;
+
+            border-top: 3px double var(--ink);
+            border-bottom: 3px double var(--ink);
+        }
+
+        .ending-symbols {
+            font-size: 18px;
+
+            letter-spacing: 8px;
+
+            margin-bottom: 20px;
+        }
+
+        .ending h2 {
+            font-family:
+                Georgia,
+                "Times New Roman",
+                serif;
+
+            font-size: clamp(30px, 5vw, 55px);
+
+            margin-bottom: 15px;
+        }
+
+        .ending p {
+            max-width: 700px;
+
+            margin: 0 auto;
+
+            color: var(--faded);
+
+            font-size: 11px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            border-top: 3px solid var(--ink);
+
+            padding: 20px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            font-size: 10px;
+
+            color: var(--faded);
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .menu-button {
+                right: 135px;
+            }
+
+            .history-page {
+                width: 90%;
+
+                padding-top: 45px;
+            }
+
+            .legend {
+                grid-template-columns: 1fr;
+            }
+
+            .legend-item {
+                border-right: none;
+
+                border-bottom: 1px solid var(--line);
+            }
+
+            .legend-item:last-child {
+                border-bottom: none;
+            }
+
+            .history-block {
+                grid-template-columns: 1fr;
+            }
+
+            .history-date {
+                border-right: none;
+
+                border-bottom: 1px solid var(--line);
+
+                padding: 18px 0;
+            }
+
+            .history-content {
+                padding: 25px 0 40px;
+            }
+
+            .lore-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-inner {
+                width: 96%;
+                height: 75vh;
+            }
+
+            .menu-folder {
+                min-width: 40px;
+            }
+
+            .folder-name {
+                font-size: 20px;
+            }
+
+            .folder-small {
+                display: none;
+            }
+
+            .folder-number {
+                top: 30px;
+                font-size: 7px;
+            }
+
+            .menu-folder:hover {
+                width: 18%;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            footer {
+                flex-direction: column;
+            }
+
+            .discord-button {
+                padding: 7px 9px;
+                font-size: 9px;
+            }
+
+            .menu-button {
+                right: 118px;
+
+                padding: 7px 9px;
+
+                font-size: 10px;
+            }
+
+            .history-header h1 {
+                font-size: 48px;
+            }
+
+            .lore-quote {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header>
+
+        <div class="site-id">
+            SILTVALE
+        </div>
+
+        <a
+            href="https://discord.gg/MQCfkwVxP5"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="discord-button">
+            JOIN DISCORD
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         MENU BUTTON
+    ========================= -->
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        onclick="openMenu()">
+
+        ☰ MENU
+
+    </button>
+
+
+    <!-- =========================
+         FULLSCREEN MENU
+    ========================= -->
+
+    <div
+        class="menu-overlay"
+        id="menuOverlay">
+
+        <div class="menu-inner">
+
+            <div class="menu-top">
+                SILTVALE / ARCHIVE / NAVIGATION
+            </div>
+
+            <button
+                class="close-menu"
+                onclick="closeMenu()">
+
+                × CLOSE
+
+            </button>
+
+
+            <a href="index.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        01
+                    </span>
+
+                    <span class="folder-name">
+                        HOME
+                    </span>
+
+                    <span class="folder-small">
+                        MAIN INDEX
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <a href="smp-info.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        02
+                    </span>
+
+                    <span class="folder-name">
+                        SMP INFO
+                    </span>
+
+                    <span class="folder-small">
+                        INFORMATION
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <a href="history.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        03
+                    </span>
+
+                    <span class="folder-name">
+                        HISTORY
+                    </span>
+
+                    <span class="folder-small">
+                        ARCHIVE
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <a href="applications.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        04
+                    </span>
+
+                    <span class="folder-name">
+                        APPLY
+                    </span>
+
+                    <span class="folder-small">
+                        APPLICATIONS
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <a href="faq.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        05
+                    </span>
+
+                    <span class="folder-name">
+                        FAQ
+                    </span>
+
+                    <span class="folder-small">
+                        QUESTIONS
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <a href="acknowledgements.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        06
+                    </span>
+
+                    <span class="folder-name">
+                        ACKNOWLEDGE
+                    </span>
+
+                    <span class="folder-small">
+                        CREDITS
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <a href="reviews.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        07
+                    </span>
+
+                    <span class="folder-name">
+                        REVIEWS
+                    </span>
+
+                    <span class="folder-small">
+                        COMMUNITY
+                    </span>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         HISTORY CONTENT
+    ========================= -->
+
+    <main class="history-page">
+
+
+        <!-- HEADER -->
+
+        <section class="history-header">
+
+            <div class="archive-label">
+                SILTVALE ARCHIVE / RECORD 003
+            </div>
+
+            <h1>
+                The History<br>
+                of Siltvale.
+            </h1>
+
+            <p>
+                A record of the world before the Plague,
+                the fall of Siltvale, and the generations
+                that eventually returned to reclaim it.
+            </p>
+
+        </section>
+
+
+        <!-- LEGEND -->
+
+        <section class="legend">
+
+            <div class="legend-item">
+
+                <span class="legend-number">
+                    01 / LEGEND
+                </span>
+
+                <span class="legend-title">
+                    The Silt Plague
+                </span>
+
+                <span class="legend-text">
+                    The disaster that consumed the old world.
+                </span>
+
+            </div>
+
+
+            <div class="legend-item">
+
+                <span class="legend-number">
+                    02 / RESIDUE
+                </span>
+
+                <span class="legend-title">
+                    The Siltwraiths
+                </span>
+
+                <span class="legend-text">
+                    The dead, changed into something beyond death.
+                </span>
+
+            </div>
+
+
+            <div class="legend-item">
+
+                <span class="legend-number">
+                    03 / RETURN
+                </span>
+
+                <span class="legend-title">
+                    The Reclaiming
+                </span>
+
+                <span class="legend-text">
+                    Descendants return to the homeland generations later.
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- TIMELINE -->
+
+        <div class="timeline-title">
+
+            <span>
+                HISTORICAL RECORD
+            </span>
+
+        </div>
+
+
+        <!-- AGE OF DISCOVERY -->
+
+        <section class="history-block">
+
+            <div class="history-date">
+                AGE I<br><br>
+                BEFORE THE SILT
+            </div>
+
+
+            <div class="history-content">
+
+                <h2>
+                    The Age of Discovery
+                </h2>
+
+                <p>
+                    Eons ago, during what descendants would
+                    eventually call the Renaissance period,
+                    the world stood on the brink of an age
+                    defined by knowledge and machinery.
+                </p>
+
+                <p>
+                    The enlightenment shaped the lives of
+                    countless peoples. New discoveries were
+                    being made, and technology was beginning
+                    to move the world toward a future built
+                    upon machinery.
+                </p>
+
+                <p>
+                    That momentum would never reach its
+                    conclusion.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- SILT PLAGUE -->
+
+        <section class="history-block">
+
+            <div class="history-date">
+                AGE II<br><br>
+                THE PLAGUE
+            </div>
+
+
+            <div class="history-content">
+
+                <h2>
+                    The Silt
+                </h2>
+
+                <p>
+                    The Silt Plague spread across the world.
+                    Gray and faintly fine beneath the sun,
+                    the Silt moved across continents and
+                    swallowed the homes of different races.
+                </p>
+
+                <p>
+                    It brought tides of disease with it.
+                    Biomes withered, settlements disappeared,
+                    and the vibrance of the world slowly
+                    faded beneath the spreading Silt.
+                </p>
+
+
+                <div class="lore-card">
+
+                    <span class="card-symbol">
+                        ⊹
+                    </span>
+
+                    <div class="card-label">
+                        NATURAL RECORD / SILT
+                    </div>
+
+                    <h3>
+                        Pale Moss
+                    </h3>
+
+                    <p>
+                        Pale moss became one of the remnants
+                        associated with the Silt. Life continued
+                        to grow within the ruins of the old
+                        world, intertwining with abandoned
+                        structures and forgotten machinery.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SILTWRAITHS -->
+
+        <section class="history-block">
+
+            <div class="history-date">
+                AGE III<br><br>
+                THE CREAKING
+            </div>
+
+
+            <div class="history-content">
+
+                <h2>
+                    The Siltwraiths
+                </h2>
+
+                <p>
+                    The Silt did not merely consume lives.
+                    Over decades, it acquired enough
+                    consciousness — enough residue from
+                    those it had claimed — to become
+                    something new.
+                </p>
+
+                <p>
+                    From the drifting haze emerged creatures
+                    unlike anything the world had previously
+                    known.
+                </p>
+
+
+                <div class="lore-quote">
+
+                    “Never turn your back.”
+
+                    <span class="quote-note">
+                        — AN OLD WARNING PASSED BETWEEN SURVIVORS
+                    </span>
+
+                </div>
+
+
+                <div class="lore-quote">
+
+                    “Don't look away.”
+
+                    <span class="quote-note">
+                        — THE CREAKING
+                    </span>
+
+                </div>
+
+
+                <div class="lore-card">
+
+                    <span class="card-symbol">
+                        ✮
+                    </span>
+
+                    <div class="card-label">
+                        ENTITY RECORD
+                    </div>
+
+                    <h3>
+                        The Creaking
+                    </h3>
+
+                    <p>
+                        Siltwraiths became the beginning of
+                        the apocalypse. They emerged from the
+                        haze as the world was already being
+                        consumed, turning the remains of the
+                        dead against the living.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FALL OF SILTVALE -->
+
+        <section class="history-block">
+
+            <div class="history-date">
+                AGE IV<br><br>
+                THE FALL
+            </div>
+
+
+            <div class="history-content">
+
+                <h2>
+                    The End of Siltvale
+                </h2>
+
+                <p>
+                    The Silt Plague and the apocalypse of
+                    the Siltwraiths eventually consumed
+                    Siltvale.
+                </p>
+
+                <p>
+                    The survivors had little choice.
+                    They fled the choking Silt and scattered
+                    across distant islands.
+                </p>
+
+                <p>
+                    Those scattered populations began
+                    forging a thalassocracy — bound together
+                    by the ocean and by a shared history
+                    that could not be forgotten.
+                </p>
+
+
+                <div class="survival">
+
+                    <p>
+                        The homeland was lost, but its history
+                        travelled with those who survived.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RETURN -->
+
+        <section class="history-block">
+
+            <div class="history-date">
+                AGE V<br><br>
+                GENERATIONS LATER
+            </div>
+
+
+            <div class="history-content">
+
+                <h2>
+                    The Reclaiming
+                </h2>
+
+                <p>
+                    Generations passed.
+                </p>
+
+                <p>
+                    The descendants of those populations
+                    who survived eventually turned their
+                    attention back toward the mainland.
+                </p>
+
+                <div class="lore-quote">
+
+                    “The Plague has ended and the
+                    Siltwraiths have become nocturnal.
+                    The mainland — our homeland —
+                    is to be reclaimed.”
+
+                </div>
+
+                <p>
+                    Word spread across the islands.
+                    The homeland that had been abandoned
+                    was no longer unreachable.
+                </p>
+
+                <p>
+                    The descendants would return to
+                    Siltvale and attempt to reclaim what
+                    had been lost.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- MODERN SILTWRAITHS -->
+
+        <section class="history-block">
+
+            <div class="history-date">
+                AGE VI<br><br>
+                THE RETURN
+            </div>
+
+
+            <div class="history-content">
+
+                <h2>
+                    What Remains
+                </h2>
+
+                <p>
+                    The Siltwraiths still thrive at night.
+                    Their existence raises questions that
+                    remain unanswered.
+                </p>
+
+
+                <div class="lore-grid">
+
+                    <div class="lore-card">
+
+                        <div class="card-label">
+                            QUESTION / 001
+                        </div>
+
+                        <h3>
+                            Residue
+                        </h3>
+
+                        <p>
+                            Are the Siltwraiths simply residue
+                            left behind by death, or is there
+                            something more within them?
+                        </p>
+
+                    </div>
+
+
+                    <div class="lore-card">
+
+                        <div class="card-label">
+                            QUESTION / 002
+                        </div>
+
+                        <h3>
+                            Behavior
+                        </h3>
+
+                        <p>
+                            Do they possess patterns,
+                            behaviors, communication,
+                            or even emotions?
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <p>
+                    Whatever the answer may be, the
+                    Siltwraiths remain a reminder of the
+                    lives lost during the Plague.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- THE WORLD -->
+
+        <section class="history-block">
+
+            <div class="history-date">
+                AGE VII<br><br>
+                THE NEW WORLD
+            </div>
+
+
+            <div class="history-content">
+
+                <h2>
+                    A Shattered World
+                </h2>
+
+                <p>
+                    The reclaiming of Siltvale is not
+                    simply a battle against monsters.
+                    It is a struggle to survive within
+                    a world that no longer resembles
+                    the one remembered by history.
+                </p>
+
+                <p>
+                    Machinery lies abandoned and
+                    overgrown, remnants of knowledge
+                    from an age that existed before
+                    the Plague.
+                </p>
+
+                <p>
+                    Descendants rediscover these machines
+                    and technologies through knowledge
+                    passed down between generations.
+                </p>
+
+                <p>
+                    Nature has grown over the remains
+                    of civilization. Ruins, machinery,
+                    moss, and forgotten technology now
+                    exist together.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- FINAL -->
+
+        <section class="ending">
+
+            <div class="ending-symbols">
+                ⊹ ₊ ✮ . ⊹ ₊ ˙ ⋆˙ ⊹ ࣪ ˖
+            </div>
+
+            <h2>
+                What awaits your fate?
+            </h2>
+
+            <p>
+                Islands foreign to one another, yet bound
+                by the same history, set sail toward the
+                land they once all called home.
+            </p>
+
+            <p style="margin-top: 15px;">
+                Will you trust another foreign soul?
+                Will you meet a friend?
+                Or an enemy?
+            </p>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <span>
+            © SILTVALE SMP
+        </span>
+
+        <span>
+            THIS SITE IS A COMMUNITY WEBSITE
+        </span>
+
+        <span>
+            SILTVALE
+        </span>
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        const menuOverlay =
+            document.getElementById("menuOverlay");
+
+        const menuButton =
+            document.getElementById("menuButton");
+
+
+        function openMenu() {
+
+            menuOverlay.classList.add("active");
+
+            menuButton.classList.add("hidden");
+
+            document.body.style.overflow = "hidden";
+
+        }
+
+
+        function closeMenu() {
+
+            menuOverlay.classList.remove("active");
+
+            menuButton.classList.remove("hidden");
+
+            document.body.style.overflow = "";
+
+        }
+
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Escape" &&
+                    menuOverlay.classList.contains("active")
+                ) {
+
+                    closeMenu();
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Siltvale SMP — Homepage</title>
+
+    <style>
+
+        /* =====================================================
+           SILTVALE — RETRO WEBSITE
+           ===================================================== */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --paper: #d8c9a8;
+            --paper-dark: #b9a984;
+            --ink: #25231f;
+            --faded: #6f695b;
+            --line: #91866f;
+            --white: #e5d9bc;
+            --red: #8a4a42;
+            --yellow: #b6a05d;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0,0,0,0.025) 0px,
+                    rgba(0,0,0,0.025) 1px,
+                    transparent 1px,
+                    transparent 4px
+                ),
+                var(--paper);
+
+            color: var(--ink);
+            font-family: "Courier New", Courier, monospace;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* OLD PAPER EFFECT */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0,0,0,0.025) 0px,
+                    rgba(0,0,0,0.025) 1px,
+                    transparent 1px,
+                    transparent 3px
+                );
+
+            opacity: 0.35;
+        }
+
+
+        /* =====================================================
+           TOP BAR — KEEP THIS EXACTLY THE SAME ON EVERY PAGE
+           ===================================================== */
+
+        header {
+            width: 100%;
+            height: 58px;
+
+            border-bottom: 3px solid var(--ink);
+            padding: 10px 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: var(--paper-dark);
+
+            position: relative;
+            z-index: 100;
+        }
+
+        .site-id {
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        /* DISCORD BUTTON */
+
+        .discord-button {
+            text-decoration: none;
+
+            background: var(--ink);
+            color: var(--paper);
+
+            border: 2px solid var(--ink);
+
+            padding: 8px 13px;
+
+            font-family: "Courier New", Courier, monospace;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+
+            transition: 0.15s ease;
+        }
+
+        .discord-button:hover {
+            background: var(--white);
+            color: var(--ink);
+
+            transform: translateY(-2px);
+        }
+
+
+        /* =====================================================
+           MENU BUTTON
+           ===================================================== */
+
+        .menu-button {
+            position: fixed;
+            top: 10px;
+            right: 155px;
+            z-index: 1000;
+
+            background: var(--ink);
+            color: var(--paper);
+
+            border: 2px solid var(--ink);
+            padding: 8px 13px;
+
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.15s ease;
+        }
+
+        .menu-button:hover {
+            background: var(--white);
+            color: var(--ink);
+        }
+
+        /* Hide MENU while fullscreen menu is open */
+
+        .menu-button.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+
+        /* =====================================================
+           MAIN
+           ===================================================== */
+
+        main {
+            width: min(1200px, 94%);
+            margin: 0 auto;
+            padding: 35px 0 70px;
+        }
+
+
+        /* =====================================================
+           HERO
+           ===================================================== */
+
+        .hero {
+            border: 3px solid var(--ink);
+            background: var(--white);
+
+            min-height: 430px;
+
+            display: grid;
+            grid-template-columns: 1.4fr 0.6fr;
+
+            position: relative;
+        }
+
+        .hero-main {
+            padding: 45px;
+            border-right: 2px solid var(--ink);
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .eyebrow {
+            font-size: 12px;
+            letter-spacing: 3px;
+            margin-bottom: 18px;
+            color: var(--faded);
+        }
+
+        .hero h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(60px, 10vw, 130px);
+            line-height: 0.8;
+            letter-spacing: -7px;
+            margin-left: -7px;
+        }
+
+        .hero-subtitle {
+            margin-top: 30px;
+            max-width: 560px;
+
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .hero-side {
+            padding: 25px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .stamp {
+            border: 2px solid var(--ink);
+            padding: 15px;
+            text-align: center;
+
+            font-size: 13px;
+            font-weight: bold;
+            transform: rotate(-2deg);
+        }
+
+        .coordinates {
+            font-size: 10px;
+            line-height: 1.7;
+            color: var(--faded);
+        }
+
+
+        /* =====================================================
+           SECTION HEADERS
+           ===================================================== */
+
+        .section-title {
+            margin: 45px 0 12px;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title::before {
+            content: "◆";
+            font-size: 9px;
+        }
+
+        .section-title::after {
+            content: "";
+            height: 1px;
+            background: var(--ink);
+            flex: 1;
+        }
+
+
+        /* =====================================================
+           INFORMATION GRID
+           ===================================================== */
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 10px;
+        }
+
+        .box {
+            border: 2px solid var(--ink);
+            background: var(--white);
+            padding: 20px;
+            min-height: 180px;
+        }
+
+        .box.large {
+            grid-row: span 2;
+        }
+
+        .box h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        .box p {
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+
+        /* =====================================================
+           QUICK LINKS
+           ===================================================== */
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .quick-link {
+            border: 2px solid var(--ink);
+            padding: 20px;
+
+            text-decoration: none;
+            color: var(--ink);
+
+            background: transparent;
+
+            transition: 0.15s ease;
+        }
+
+        .quick-link:hover {
+            background: var(--ink);
+            color: var(--paper);
+            transform: translateY(-3px);
+        }
+
+        .quick-link strong {
+            display: block;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .quick-link span {
+            font-size: 10px;
+        }
+
+
+        /* =====================================================
+           NOTICE
+           ===================================================== */
+
+        .notice {
+            margin-top: 10px;
+
+            border: 2px dashed var(--ink);
+            padding: 18px;
+
+            font-size: 11px;
+            line-height: 1.6;
+
+            background: #cbbd9d;
+        }
+
+        .notice strong {
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           FOOTER
+           ===================================================== */
+
+        footer {
+            border-top: 3px solid var(--ink);
+            padding: 20px;
+
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+
+            font-size: 10px;
+            color: var(--faded);
+        }
+
+
+        /* =====================================================
+           FULLSCREEN FILE / FOLDER MENU
+           ===================================================== */
+
+        .menu-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 900;
+
+            background: #c2b28e;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition:
+                opacity 0.25s ease,
+                visibility 0.25s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-inner {
+            width: 92%;
+            height: 82vh;
+
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+
+            position: relative;
+        }
+
+
+        /* =====================================================
+           CLOSE BUTTON
+           ===================================================== */
+
+        .close-menu {
+            position: absolute;
+            right: 0;
+            top: -45px;
+
+            background: transparent;
+            color: var(--ink);
+
+            border: 1px solid var(--ink);
+            padding: 7px 11px;
+
+            font-family: "Courier New", Courier, monospace;
+            font-size: 10px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.15s ease;
+        }
+
+        .close-menu:hover {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+
+        /* MENU HEADER */
+
+        .menu-top {
+            position: absolute;
+            left: 0;
+            top: -45px;
+
+            font-size: 10px;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+
+        /* =====================================================
+           FOLDERS
+           ===================================================== */
+
+        .menu-folder {
+            height: 100%;
+            width: 13%;
+
+            min-width: 90px;
+            max-width: 170px;
+
+            border-left: 2px solid var(--ink);
+            border-right: 2px solid var(--ink);
+
+            text-decoration: none;
+            color: var(--ink);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+
+            overflow: hidden;
+
+            transition:
+                width 0.25s ease,
+                transform 0.25s ease,
+                filter 0.25s ease,
+                background 0.25s ease;
+
+            box-shadow: -5px 0 0 rgba(37,35,31,0.08);
+        }
+
+
+        /* Different file materials */
+
+        .menu-folder:nth-of-type(1) {
+            background: #d8c9a8;
+        }
+
+        .menu-folder:nth-of-type(2) {
+            background: #eee4cb;
+        }
+
+        .menu-folder:nth-of-type(3) {
+            background: #9d9d91;
+        }
+
+        .menu-folder:nth-of-type(4) {
+            background: #b69b78;
+        }
+
+        .menu-folder:nth-of-type(5) {
+            background: #e0cba7;
+        }
+
+        .menu-folder:nth-of-type(6) {
+            background: #78766d;
+            color: #eee4cb;
+        }
+
+        .menu-folder:nth-of-type(7) {
+            background: #a8a88d;
+        }
+
+
+        /* Folder tab */
+
+        .menu-folder::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 55%;
+            height: 32px;
+
+            border-right: 2px solid var(--ink);
+            border-bottom: 2px solid var(--ink);
+
+            background: inherit;
+        }
+
+
+        /* Archive line */
+
+        .menu-folder::after {
+            content: "";
+            position: absolute;
+
+            width: 65%;
+            height: 1px;
+
+            background: currentColor;
+
+            opacity: 0.35;
+
+            bottom: 18%;
+            left: 17%;
+        }
+
+
+        /* =====================================================
+           FOLDER CONTENT
+           ===================================================== */
+
+        .folder-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            height: 100%;
+            width: 100%;
+
+            position: relative;
+            z-index: 2;
+
+            transition: transform 0.25s ease;
+        }
+
+        .folder-number {
+            font-size: 9px;
+            letter-spacing: 2px;
+
+            position: absolute;
+            top: 55px;
+            left: 50%;
+
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
+        .folder-name {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: clamp(25px, 3vw, 43px);
+            font-weight: bold;
+
+            letter-spacing: 2px;
+
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+
+            white-space: nowrap;
+
+            transition: 0.25s ease;
+        }
+
+        .folder-small {
+            position: absolute;
+
+            bottom: 45px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            font-size: 8px;
+            letter-spacing: 1px;
+
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           HOVER EFFECT
+           ===================================================== */
+
+        .menu-folder:hover {
+            width: 21%;
+            transform: translateY(-10px);
+
+            filter: contrast(1.05);
+
+            z-index: 10;
+
+            box-shadow:
+                -8px 0 0 rgba(37,35,31,0.12),
+                8px 0 0 rgba(37,35,31,0.08);
+        }
+
+        .menu-folder:hover .folder-content {
+            transform: scale(1.04);
+        }
+
+        .menu-folder:hover .folder-name {
+            letter-spacing: 4px;
+        }
+
+        .menu-folder:hover::before {
+            height: 40px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 800px) {
+
+            .hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-main {
+                border-right: none;
+                border-bottom: 2px solid var(--ink);
+                padding: 30px;
+            }
+
+            .hero-side {
+                min-height: 180px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .box.large {
+                grid-row: auto;
+                grid-column: span 2;
+            }
+
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-inner {
+                width: 95%;
+                height: 75vh;
+            }
+
+            .menu-folder {
+                min-width: 45px;
+                width: 14%;
+            }
+
+            .menu-folder:hover {
+                width: 23%;
+            }
+
+            .folder-name {
+                font-size: 21px;
+            }
+
+            .folder-number,
+            .folder-small {
+                font-size: 6px;
+            }
+
+            .menu-button {
+                right: 145px;
+            }
+
+            .discord-button {
+                font-size: 9px;
+                padding: 7px 9px;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .box.large {
+                grid-column: auto;
+            }
+
+            .hero h1 {
+                font-size: 65px;
+            }
+
+            .hero-main {
+                padding: 25px;
+            }
+
+            .menu-inner {
+                width: 96%;
+                height: 72vh;
+            }
+
+            .menu-folder {
+                min-width: 40px;
+            }
+
+            .menu-folder:hover {
+                width: 28%;
+            }
+
+            .folder-name {
+                font-size: 17px;
+            }
+
+            .folder-number {
+                top: 40px;
+            }
+
+            .folder-small {
+                bottom: 25px;
+            }
+
+            .menu-button {
+                right: 125px;
+            }
+
+            .discord-button {
+                font-size: 8px;
+                padding: 7px 8px;
+            }
+
+            footer {
+                flex-direction: column;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+    <!-- =====================================================
+         TO BAR
+         THIS SAME BAR WILL BE USED ON EVERY PAGE
+         ===================================================== -->
+
+    <header>
+
+        <div class="site-id">
+            SILTVALE
+        </div>
+
+        <a
+            href="https://discord.gg/MQCfkwVxP5"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="discord-button">
+            JOIN DISCORD
+        </a>
+
+    </header>
+
+
+    <!-- MENU BUTTON -->
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        onclick="openMenu()">
+        ☰ MENU
+    </button>
+
+
+    <!-- =====================================================
+         FULLSCREEN MENU
+         KEEP THIS SAME ON EVERY PAGE
+         ===================================================== -->
+
+    <div class="menu-overlay" id="menuOverlay">
+
+        <div class="menu-inner">
+
+            <div class="menu-top">
+                SILTVALE / ARCHIVE / NAVIGATION
+            </div>
+
+            <button
+                class="close-menu"
+                onclick="closeMenu()">
+                × CLOSE
+            </button>
+
+
+            <!-- HOME -->
+
+            <a href="index.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        01
+                    </span>
+
+                    <span class="folder-name">
+                        HOME
+                    </span>
+
+                    <span class="folder-small">
+                        MAIN INDEX
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- SMP INFO -->
+
+            <a href="smp-info.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        02
+                    </span>
+
+                    <span class="folder-name">
+                        SMP INFO
+                    </span>
+
+                    <span class="folder-small">
+                        INFORMATION
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- HISTORY -->
+
+            <a href="history.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        03
+                    </span>
+
+                    <span class="folder-name">
+                        HISTORY
+                    </span>
+
+                    <span class="folder-small">
+                        ARCHIVE
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- APPLICATIONS -->
+
+            <a href="applications.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        04
+                    </span>
+
+                    <span class="folder-name">
+                        APPLY
+                    </span>
+
+                    <span class="folder-small">
+                        APPLICATIONS
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- FAQ -->
+
+            <a href="faq.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        05
+                    </span>
+
+                    <span class="folder-name">
+                        FAQ
+                    </span>
+
+                    <span class="folder-small">
+                        QUESTIONS
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- ACKNOWLEDGEMENTS -->
+
+            <a href="acknowledgements.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        06
+                    </span>
+
+                    <span class="folder-name">
+                        ACKNOWLEDGE
+                    </span>
+
+                    <span class="folder-small">
+                        CREDITS
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <!-- REVIEWS -->
+
+            <a href="reviews.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        07
+                    </span>
+
+                    <span class="folder-name">
+                        REVIEWS
+                    </span>
+
+                    <span class="folder-small">
+                        COMMUNITY
+                    </span>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <main>
+
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-main">
+
+                <div class="eyebrow">
+                    WELCOME TO THE OFFICIAL WEBSITE
+                </div>
+
+                <h1>
+                    SILT<br>VALE
+                </h1>
+
+                <p class="hero-subtitle">
+                    A Minecraft SMP built around its community,
+                    its stories, and the strange little world
+                    that developed between them.
+                </p>
+
+            </div>
+
+
+            <div class="hero-side">
+
+                <div class="stamp">
+
+                    SILTVALE<br>
+                    SMP<br>
+                    OFFICIAL
+
+                </div>
+
+                <div class="coordinates">
+
+                    STATUS: ACTIVE<br>
+                    SERVER: ONLINE<br>
+                    ACCESS: COMMUNITY
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ABOUT -->
+
+        <div class="section-title">
+            ABOUT SILTVALE
+        </div>
+
+
+        <section class="info-grid">
+
+
+            <div class="box large">
+
+                <h2>
+                    What is Siltvale?
+                </h2>
+
+                <p>
+                    Siltvale is a Minecraft survival multiplayer
+                    server built around its players and the world
+                    they create together.
+                    <br><br>
+                    This website serves as an archive of the server:
+                    its history, community, information, and everything
+                    that makes Siltvale what it is.
+                    <br><br>
+                    More information about the SMP will be added here
+                    once the official details are available.
+                </p>
+
+            </div>
+
+
+            <div class="box">
+
+                <h2>
+                    COMMUNITY
+                </h2>
+
+                <p>
+                    A server is nothing without the people
+                    who inhabit it.
+                </p>
+
+            </div>
+
+
+            <div class="box">
+
+                <h2>
+                    LORE
+                </h2>
+
+                <p>
+                    Every world has a history.
+                    Siltvale is no different.
+                </p>
+
+            </div>
+
+
+            <div class="box">
+
+                <h2>
+                    WORLD
+                </h2>
+
+                <p>
+                    Explore the world, settlements,
+                    builds and stories of Siltvale.
+                </p>
+
+            </div>
+
+
+            <div class="box">
+
+                <h2>
+                    PEOPLE
+                </h2>
+
+                <p>
+                    Meet the players who make
+                    Siltvale what it is.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        
+
+
+        <!-- QUICK NAVIGATION -->
+
+        <div class="section-title">
+            EXPLORE
+        </div>
+
+
+        <section class="quick-links">
+
+
+            <a href="smp-info.html" class="quick-link">
+
+                <strong>
+                    SMP INFO →
+                </strong>
+
+                <span>
+                    SERVER INFORMATION / FEATURES / DETAILS
+                </span>
+
+            </a>
+
+
+            <a href="history.html" class="quick-link">
+
+                <strong>
+                    HISTORY →
+                </strong>
+
+                <span>
+                    THE HISTORY AND DEVELOPMENT OF SILTVALE
+                </span>
+
+            </a>
+
+
+            <a href="applications.html" class="quick-link">
+
+                <strong>
+                    APPLY →
+                </strong>
+
+                <span>
+                    FIND OUT HOW TO BECOME PART OF THE COMMUNITY
+                </span>
+
+            </a>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <span>
+            © SILTVALE SMP
+        </span>
+
+        <span>
+            THIS SITE IS A COMMUNITY WEBSITE
+        </span>
+
+        <span>
+            SILTVALE
+        </span>
+
+    </footer>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+         ===================================================== -->
+
+    <script>
+
+        const menuOverlay =
+            document.getElementById("menuOverlay");
+
+        const menuButton =
+            document.getElementById("menuButton");
+
+
+        function openMenu() {
+
+            menuOverlay.classList.add("active");
+
+            menuButton.classList.add("hidden");
+
+            document.body.style.overflow = "hidden";
+
+        }
+
+
+        function closeMenu() {
+
+            menuOverlay.classList.remove("active");
+
+            menuButton.classList.remove("hidden");
+
+            document.body.style.overflow = "";
+
+        }
+
+
+        /* Close when clicking outside the folders */
+
+        menuOverlay.addEventListener("click", function(event) {
+
+            if (event.target === menuOverlay) {
+
+                closeMenu();
+
+            }
+
+        });
+
+
+        /* ESC closes the menu */
+
+        document.addEventListener("keydown", function(event) {
+
+            if (event.key === "Escape") {
+
+                closeMenu();
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>

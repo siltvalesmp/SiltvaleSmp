@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Acknowledgements — Siltvale</title>
+
+    <style>
+        :root {
+            --paper: #d8c9a8;
+            --paper-dark: #b9a984;
+            --ink: #25231f;
+            --faded: #6f695b;
+            --line: #91866f;
+            --white: #e5d9bc;
+            --red: #8a4a42;
+            --yellow: #b6a05d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(37, 35, 31, 0.025) 0px,
+                    rgba(37, 35, 31, 0.025) 1px,
+                    transparent 1px,
+                    transparent 4px
+                ),
+                var(--paper);
+
+            color: var(--ink);
+            font-family: "Courier New", Courier, monospace;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           TOP BAR
+        ========================= */
+
+        header {
+            width: 100%;
+            height: 58px;
+            border-bottom: 3px solid var(--ink);
+            padding: 10px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--paper-dark);
+            position: relative;
+            z-index: 100;
+        }
+
+        .site-id {
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .discord-button {
+            text-decoration: none;
+            background: var(--ink);
+            color: var(--paper);
+            border: 2px solid var(--ink);
+            padding: 8px 13px;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: 0.15s ease;
+        }
+
+        .discord-button:hover {
+            background: var(--white);
+            color: var(--ink);
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           MENU BUTTON
+        ========================= */
+
+        .menu-button {
+            position: fixed;
+            top: 10px;
+            right: 155px;
+            z-index: 1000;
+            background: var(--ink);
+            color: var(--paper);
+            border: 2px solid var(--ink);
+            padding: 8px 13px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.15s ease;
+        }
+
+        .menu-button:hover {
+            background: var(--white);
+            color: var(--ink);
+        }
+
+        .menu-button.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* =========================
+           FULLSCREEN MENU
+        ========================= */
+
+        .menu-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 900;
+            background: #c2b28e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition:
+                opacity 0.25s ease,
+                visibility 0.25s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-inner {
+            width: 92%;
+            height: 82vh;
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            position: relative;
+        }
+
+        .close-menu {
+            position: absolute;
+            right: 0;
+            top: -45px;
+            background: transparent;
+            color: var(--ink);
+            border: 1px solid var(--ink);
+            padding: 7px 11px;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.15s ease;
+        }
+
+        .close-menu:hover {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        .menu-top {
+            position: absolute;
+            left: 0;
+            top: -45px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .menu-folder {
+            height: 100%;
+            width: 13%;
+            min-width: 90px;
+            max-width: 170px;
+            border-left: 2px solid var(--ink);
+            border-right: 2px solid var(--ink);
+            text-decoration: none;
+            color: var(--ink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transition:
+                width 0.25s ease,
+                transform 0.25s ease,
+                filter 0.25s ease,
+                background 0.25s ease;
+            box-shadow:
+                -5px 0 0 rgba(37,35,31,0.08);
+        }
+
+        .menu-folder:nth-of-type(1) {
+            background: #d8c9a8;
+        }
+
+        .menu-folder:nth-of-type(2) {
+            background: #eee4cb;
+        }
+
+        .menu-folder:nth-of-type(3) {
+            background: #9d9d91;
+        }
+
+        .menu-folder:nth-of-type(4) {
+            background: #b69b78;
+        }
+
+        .menu-folder:nth-of-type(5) {
+            background: #e0cba7;
+        }
+
+        .menu-folder:nth-of-type(6) {
+            background: #78766d;
+            color: #eee4cb;
+        }
+
+        .menu-folder:nth-of-type(7) {
+            background: #a8a88d;
+        }
+
+        .menu-folder::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 55%;
+            height: 32px;
+            border-right: 2px solid var(--ink);
+            border-bottom: 2px solid var(--ink);
+            background: inherit;
+        }
+
+        .menu-folder::after {
+            content: "";
+            position: absolute;
+            width: 65%;
+            height: 1px;
+            background: currentColor;
+            opacity: 0.35;
+            bottom: 18%;
+            left: 17%;
+        }
+
+        .folder-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.25s ease;
+        }
+
+        .folder-number {
+            font-size: 9px;
+            letter-spacing: 2px;
+            position: absolute;
+            top: 55px;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
+        .folder-name {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(25px, 3vw, 43px);
+            font-weight: bold;
+            letter-spacing: 2px;
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            white-space: nowrap;
+            transition: 0.25s ease;
+        }
+
+        .folder-small {
+            position: absolute;
+            bottom: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 8px;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .menu-folder:hover {
+            width: 21%;
+            transform: translateY(-10px);
+            filter: contrast(1.05);
+            z-index: 10;
+            box-shadow:
+                -8px 0 0 rgba(37,35,31,0.12),
+                8px 0 0 rgba(37,35,31,0.08);
+        }
+
+        .menu-folder:hover .folder-content {
+            transform: scale(1.04);
+        }
+
+        .menu-folder:hover .folder-name {
+            letter-spacing: 4px;
+        }
+
+        .menu-folder:hover::before {
+            height: 40px;
+        }
+
+        /* =========================
+           PAGE CONTENT
+        ========================= */
+
+        main {
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 40px 25px 50px;
+        }
+
+        .page-heading {
+            border-bottom: 2px solid var(--ink);
+            padding-bottom: 16px;
+            margin-bottom: 22px;
+        }
+
+        .page-label {
+            font-size: 9px;
+            letter-spacing: 3px;
+            color: var(--faded);
+            margin-bottom: 7px;
+        }
+
+        h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(40px, 6vw, 70px);
+            line-height: 0.95;
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            margin-top: 10px;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--faded);
+        }
+
+        .intro {
+            max-width: 760px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 28px;
+        }
+
+        /* =========================
+           FINISHED ACKNOWLEDGEMENTS
+        ========================= */
+
+        .section-title {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 20px;
+            border-bottom: 2px solid var(--ink);
+            padding-bottom: 8px;
+            margin-bottom: 14px;
+        }
+
+        .section-title h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 26px;
+        }
+
+        .section-title span {
+            font-size: 9px;
+            color: var(--faded);
+            letter-spacing: 1px;
+        }
+
+        .ack-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .ack-card {
+            border: 2px solid var(--ink);
+            background: rgba(229, 217, 188, 0.48);
+            padding: 17px 20px;
+            display: grid;
+            grid-template-columns: 210px 1fr;
+            gap: 22px;
+        }
+
+        .ack-person {
+            border-right: 1px solid var(--line);
+            padding-right: 18px;
+        }
+
+        .ack-number {
+            font-size: 9px;
+            letter-spacing: 2px;
+            color: var(--faded);
+            margin-bottom: 8px;
+        }
+
+        .ack-name {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 22px;
+            font-weight: bold;
+            line-height: 1.05;
+            margin-bottom: 7px;
+        }
+
+        .ack-role {
+            font-size: 8px;
+            letter-spacing: 1.5px;
+            color: var(--faded);
+        }
+
+        .ack-text {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 14px;
+            line-height: 1.5;
+            align-self: center;
+        }
+
+        /* =========================
+           WIP SECTION
+        ========================= */
+
+        .wip-section {
+            margin-top: 32px;
+        }
+
+        .placeholder {
+            color: var(--faded);
+            font-style: italic;
+        }
+
+        /* =========================
+           COMMUNITY MESSAGE
+        ========================= */
+
+        .community-note {
+            margin-top: 28px;
+            border: 2px solid var(--ink);
+            background: var(--ink);
+            color: var(--paper);
+            padding: 22px 25px;
+        }
+
+        .community-label {
+            font-size: 9px;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            color: #c9bea4;
+        }
+
+        .community-note p {
+            max-width: 850px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 17px;
+            line-height: 1.45;
+        }
+
+        /* =========================
+           MORE TO COME
+        ========================= */
+
+        .more {
+            margin-top: 25px;
+            border-top: 2px solid var(--ink);
+            padding-top: 15px;
+        }
+
+        .more-title {
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 9px;
+        }
+
+        .names {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .names span {
+            border: 1px solid var(--line);
+            padding: 6px 9px;
+            font-size: 9px;
+            background: rgba(229, 217, 188, 0.4);
+        }
+
+        .final-note {
+            margin-top: 28px;
+            text-align: center;
+        }
+
+        .final-note strong {
+            display: block;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 23px;
+            letter-spacing: 1px;
+        }
+
+        .final-note span {
+            display: block;
+            margin-top: 6px;
+            font-size: 8px;
+            letter-spacing: 2px;
+            color: var(--faded);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            border-top: 3px solid var(--ink);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            font-size: 10px;
+            color: var(--faded);
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            .menu-button {
+                right: 125px;
+            }
+
+            main {
+                padding: 30px 18px 40px;
+            }
+
+            .ack-card {
+                grid-template-columns: 1fr;
+                gap: 13px;
+                padding: 15px;
+            }
+
+            .ack-person {
+                border-right: none;
+                border-bottom: 1px solid var(--line);
+                padding-right: 0;
+                padding-bottom: 10px;
+            }
+
+            .ack-text {
+                font-size: 14px;
+            }
+
+            .community-note p {
+                font-size: 16px;
+            }
+
+            .menu-inner {
+                width: 96%;
+                height: 75vh;
+            }
+
+            .menu-folder {
+                min-width: 45px;
+            }
+
+            .folder-name {
+                font-size: 20px;
+            }
+
+            .folder-number,
+            .folder-small {
+                font-size: 6px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            footer {
+                flex-direction: column;
+            }
+
+            .menu-button {
+                right: 110px;
+            }
+
+            .site-id {
+                font-size: 10px;
+            }
+
+            .discord-button {
+                font-size: 9px;
+                padding: 7px 9px;
+            }
+
+            h1 {
+                font-size: 43px;
+            }
+
+            .intro {
+                font-size: 15px;
+            }
+
+            .section-title {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .menu-inner {
+                width: 100%;
+            }
+
+            .menu-folder {
+                min-width: 38px;
+            }
+
+            .folder-name {
+                font-size: 15px;
+            }
+
+            .folder-number {
+                top: 35px;
+            }
+
+            .folder-small {
+                bottom: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP BAR -->
+
+    <header>
+
+        <div class="site-id">
+            SILTVALE
+        </div>
+
+        <a
+            href="https://discord.gg/MQCfkwVxP5"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="discord-button">
+            JOIN DISCORD
+        </a>
+
+    </header>
+
+
+    <!-- MENU BUTTON -->
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        onclick="openMenu()">
+        ☰ MENU
+    </button>
+
+
+    <!-- FULLSCREEN MENU -->
+
+    <div class="menu-overlay" id="menuOverlay">
+
+        <div class="menu-inner">
+
+            <div class="menu-top">
+                SILTVALE / ARCHIVE / NAVIGATION
+            </div>
+
+            <button
+                class="close-menu"
+                onclick="closeMenu()">
+                × CLOSE
+            </button>
+
+            <a href="index.html" class="menu-folder">
+                <div class="folder-content">
+                    <span class="folder-number">01</span>
+                    <span class="folder-name">HOME</span>
+                    <span class="folder-small">MAIN INDEX</span>
+                </div>
+            </a>
+
+            <a href="smp-info.html" class="menu-folder">
+                <div class="folder-content">
+                    <span class="folder-number">02</span>
+                    <span class="folder-name">SMP INFO</span>
+                    <span class="folder-small">INFORMATION</span>
+                </div>
+            </a>
+
+            <a href="history.html" class="menu-folder">
+                <div class="folder-content">
+                    <span class="folder-number">03</span>
+                    <span class="folder-name">HISTORY</span>
+                    <span class="folder-small">ARCHIVE</span>
+                </div>
+            </a>
+
+            <a href="apply.html" class="menu-folder">
+                <div class="folder-content">
+                    <span class="folder-number">04</span>
+                    <span class="folder-name">APPLY</span>
+                    <span class="folder-small">APPLICATIONS</span>
+                </div>
+            </a>
+
+            <a href="faq.html" class="menu-folder">
+                <div class="folder-content">
+                    <span class="folder-number">05</span>
+                    <span class="folder-name">FAQ</span>
+                    <span class="folder-small">QUESTIONS</span>
+                </div>
+            </a>
+
+            <a href="acknowledgements.html" class="menu-folder">
+                <div class="folder-content">
+                    <span class="folder-number">06</span>
+                    <span class="folder-name">ACKNOWLEDGE</span>
+                    <span class="folder-small">CREDITS</span>
+                </div>
+            </a>
+
+            <a href="reviews.html" class="menu-folder">
+                <div class="folder-content">
+                    <span class="folder-number">07</span>
+                    <span class="folder-name">REVIEWS</span>
+                    <span class="folder-small">COMMUNITY</span>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+
+    <!-- PAGE CONTENT -->
+
+    <main>
+
+        <section class="page-heading">
+
+            <div class="page-label">
+                SILTVALE / PEOPLE WHO HELPED MAKE THIS POSSIBLE
+            </div>
+
+            <h1>
+                ACKNOWLEDGEMENTS
+            </h1>
+
+            <div class="subtitle">
+                NO EFFORT GOES UNSEEN
+            </div>
+
+        </section>
+
+
+        <!-- EARLY ACKNOWLEDGEMENTS -->
+
+        <section>
+
+            <div class="section-title">
+                <h2>Early Acknowledgements</h2>
+                <span>FINISHED</span>
+            </div>
+
+            <p class="intro">
+                Siltvale will continue to grow from here on out, and I want
+                to acknowledge the people who helped carry it. Even when
+                Siltvale was still uncertain, messy, an idea slowly becoming
+                real, these were the people who stayed, created, contributed,
+                and believed in what it could become.
+            </p>
+
+
+            <div class="ack-list">
+
+                <!-- ROGUE -->
+
+                <article class="ack-card">
+
+                    <div class="ack-person">
+
+                        <div class="ack-number">
+                            01
+                        </div>
+
+                        <div class="ack-name">
+                            Rogue [Vi]
+                        </div>
+
+                        <div class="ack-role">
+                            OVERSEER
+                        </div>
+
+                    </div>
+
+                    <div class="ack-text">
+                        Thank you for all of your support behind the scenes
+                        within Siltvale. "We're in this together." That
+                        genuinely meant a lot more than I could put into
+                        words!
+
+                        <br><br>
+
+                        Thank you for trusting in me and keeping up despite
+                        my messy pace, for always understanding, hearing me
+                        out, and choosing to stay and listen no matter how
+                        complicated things seem. I want you to always remember
+                        that I appreciate your hard work and I see your efforts.
+                    </div>
+
+                </article>
+
+
+                <!-- TIMFINN -->
+
+                <article class="ack-card">
+
+                    <div class="ack-person">
+
+                        <div class="ack-number">
+                            02
+                        </div>
+
+                        <div class="ack-name">
+                            Timfinn [Silver]
+                        </div>
+
+                        <div class="ack-role">
+                            VISIONARY
+                        </div>
+
+                    </div>
+
+                    <div class="ack-text">
+                        Thank you for being one of the earliest people to help
+                        shape the direction and atmosphere of Siltvale. Your
+                        ideas, support, and presence during development
+                        genuinely mattered more than you probably realize.
+                    </div>
+
+                </article>
+
+
+                <!-- BREADZYY -->
+
+                <article class="ack-card">
+
+                    <div class="ack-person">
+
+                        <div class="ack-number">
+                            03
+                        </div>
+
+                        <div class="ack-name">
+                            breadzyy_
+                        </div>
+
+                        <div class="ack-role">
+                            BUILDER
+                        </div>
+
+                    </div>
+
+                    <div class="ack-text">
+                        Thank you for constantly showing up and bringing life
+                        into Siltvale through your assistance and builds. The
+                        abandoned factory, sewer entrance, and the atmosphere
+                        you helped create became part of what makes the world
+                        feel real.
+                    </div>
+
+                </article>
+
+
+                <!-- PHASMA -->
+
+                <article class="ack-card">
+
+                    <div class="ack-person">
+
+                        <div class="ack-number">
+                            04
+                        </div>
+
+                        <div class="ack-name">
+                            Phasma
+                        </div>
+
+                        <div class="ack-role">
+                            CRAFTWRIGHT / VISIONARY
+                        </div>
+
+                    </div>
+
+                    <div class="ack-text">
+                        Thank you for contributing not only through builds,
+                        but also through the ideas you brought into the world.
+                        Your contributions helped expand Siltvale beyond just
+                        structures and into something with depth and story.
+
+                        <br><br>
+
+                        Thank you for pouring your passion in creating into
+                        Siltvale! I'm so proud of everything you've built.
+                        I genuinely appreciate you taking initiatives and
+                        contributing so much help!
+                    </div>
+
+                </article>
+
+
+                <!-- ZAY -->
+
+                <article class="ack-card">
+
+                    <div class="ack-person">
+
+                        <div class="ack-number">
+                            05
+                        </div>
+
+                        <div class="ack-name">
+                            Zay
+                        </div>
+
+                        <div class="ack-role">
+                            KEEPER / VISIONARY / BUILDER
+                        </div>
+
+                    </div>
+
+                    <div class="ack-text">
+                        Thank you for the creativity and energy you brought
+                        into Siltvale. You pushed yourself to learn a lot of
+                        things you didn't know and gained a lot of experience.
+                        Be proud of your achievements!
+
+                        <br><br>
+
+                        You've helped lay the foundation of Siltvale in more
+                        ways than you realize.
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- COMMUNITY MESSAGE -->
+
+        <section class="community-note">
+
+            <div class="community-label">
+                A MESSAGE TO EVERYONE
+            </div>
+
+            <p>
+                Siltvale continues to grow because of everyone's hard work
+                in turning ideas into action. I'm so proud of what our team
+                has achieved so far, so I genuinely wanted to make sure your
+                efforts did not go unseen. Thank you all for helping turn
+                this project into something real.
+            </p>
+
+        </section>
+
+
+        <!-- WORK IN PROGRESS -->
+
+        <section class="wip-section">
+
+            <div class="section-title">
+
+                <h2>
+                    Acknowledgements
+                </h2>
+
+                <span>
+                    WORK IN PROGRESS
+                </span>
+
+            </div>
+
+
+            <div class="ack-list">
+
+                <!-- MEL -->
+
+                <article class="ack-card">
+
+                    <div class="ack-person">
+
+                        <div class="ack-number">
+                            01
+                        </div>
+
+                        <div class="ack-name">
+                            Mel
+                        </div>
+
+                        <div class="ack-role">
+                            FOREMAN
+                        </div>
+
+                    </div>
+
+                    <div class="ack-text">
+                        Thank you for bringing much more stable and reliable
+                        hosting to Siltvale. Your support and work within the
+                        server have genuinely made the launch much more
+                        possible. You took a huge part in taking actions
+                        towards launch, and thank you for teaching me a lot
+                        as well!
+                    </div>
+
+                </article>
+
+
+                <!-- GARLIC -->
+
+                <article class="ack-card">
+
+                    <div class="ack-person">
+
+                        <div class="ack-number">
+                            02
+                        </div>
+
+                        <div class="ack-name">
+                            Garcalarci [Garlic]
+                        </div>
+
+                        <div class="ack-role">
+                            VISIONARY
+                        </div>
+
+                    </div>
+
+                    <div class="ack-text">
+                        Thank you for bringing more life into Siltvale, not
+                        just through its lore but especially within the
+                        community. Knowing that you chose to take on this
+                        role partly because you believed in me, in Siltvale,
+                        and in everything I've worked for means more than I
+                        can put into words.
+
+                        <br><br>
+
+                        I know you've given up being "simply a player" to help
+                        with something that matters so much to me, and I don't
+                        take that lightly. It means the world to me.
+                    </div>
+
+                </article>
+
+
+                <!-- ELLY -->
+
+                <article class="ack-card">
+
+                    <div class="ack-person">
+
+                        <div class="ack-number">
+                            03
+                        </div>
+
+                        <div class="ack-name">
+                            Elly
+                        </div>
+
+                        <div class="ack-role">
+                            VISIONARY
+                        </div>
+
+                    </div>
+
+                    <div class="ack-text placeholder">
+                        Your acknowledgement is currently being written.
+                    </div>
+
+                </article>
+
+
+                <!-- ARDEN -->
+
+                <article class="ack-card">
+
+                    <div class="ack-person">
+
+                        <div class="ack-number">
+                            04
+                        </div>
+
+                        <div class="ack-name">
+                            Arden
+                        </div>
+
+                        <div class="ack-role">
+                            FUNDER / VISIONARY
+                        </div>
+
+                    </div>
+
+                    <div class="ack-text placeholder">
+                        Your acknowledgement is currently being written.
+                    </div>
+
+                </article>
+
+
+                <!-- JADE -->
+
+                <article class="ack-card">
+
+                    <div class="ack-person">
+
+                        <div class="ack-number">
+                            05
+                        </div>
+
+                        <div class="ack-name">
+                            Jade
+                        </div>
+
+                    </div>
+
+                    <div class="ack-text placeholder">
+                        Your acknowledgement is currently being written.
+                    </div>
+
+                </article>
+
+
+                <!-- FLUTTER -->
+
+                <article class="ack-card">
+
+                    <div class="ack-person">
+
+                        <div class="ack-number">
+                            06
+                        </div>
+
+                        <div class="ack-name">
+                            Flutter
+                        </div>
+
+                    </div>
+
+                    <div class="ack-text placeholder">
+                        Your acknowledgement is currently being written.
+                    </div>
+
+                </article>
+
+
+                <!-- FISH -->
+
+                <article class="ack-card">
+
+                    <div class="ack-person">
+
+                        <div class="ack-number">
+                            07
+                        </div>
+
+                        <div class="ack-name">
+                            Fish
+                        </div>
+
+                    </div>
+
+                    <div class="ack-text placeholder">
+                        Your acknowledgement is currently being written.
+                    </div>
+
+                </article>
+
+
+                <!-- JAN -->
+
+                <article class="ack-card">
+
+                    <div class="ack-person">
+
+                        <div class="ack-number">
+                            08
+                        </div>
+
+                        <div class="ack-name">
+                            Jan
+                        </div>
+
+                    </div>
+
+                    <div class="ack-text placeholder">
+                        Your acknowledgement is currently being written.
+                    </div>
+
+                </article>
+
+
+                <!-- PICKEL -->
+
+                <article class="ack-card">
+
+                    <div class="ack-person">
+
+                        <div class="ack-number">
+                            09
+                        </div>
+
+                        <div class="ack-name">
+                            Pickel
+                        </div>
+
+                    </div>
+
+                    <div class="ack-text placeholder">
+                        Your acknowledgement is currently being written.
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- MORE TO COME -->
+
+        <section class="more">
+
+            <div class="more-title">
+                MORE ACKNOWLEDGEMENTS TO COME
+            </div>
+
+            <div class="names">
+                <span>Elly</span>
+                <span>Arden</span>
+                <span>Jade</span>
+                <span>Flutter</span>
+                <span>Fish</span>
+                <span>Jan</span>
+                <span>Pickel</span>
+            </div>
+
+        </section>
+
+
+        <!-- FINAL -->
+
+        <section class="final-note">
+
+            <strong>
+                NO EFFORT GOES UNSEEN.
+            </strong>
+
+            <span>
+                THIS PAGE IS STILL BEING BUILT.
+            </span>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <span>
+            © SILTVALE SMP
+        </span>
+
+        <span>
+            THIS SITE IS A COMMUNITY WEBSITE
+        </span>
+
+        <span>
+            SILTVALE
+        </span>
+
+    </footer>
+
+
+    <!-- MENU SCRIPT -->
+
+    <script>
+
+        const menuOverlay = document.getElementById("menuOverlay");
+        const menuButton = document.getElementById("menuButton");
+
+        function openMenu() {
+            menuOverlay.classList.add("active");
+            menuButton.classList.add("hidden");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeMenu() {
+            menuOverlay.classList.remove("active");
+            menuButton.classList.remove("hidden");
+            document.body.style.overflow = "";
+        }
+
+    </script>
+
+</body>
+</html>

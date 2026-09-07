@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Siltvale — FAQ</title>
+
+    <style>
+
+        :root {
+            --paper: #d8c9a8;
+            --paper-dark: #b9a984;
+            --ink: #25231f;
+            --faded: #6f695b;
+            --line: #91866f;
+            --white: #e5d9bc;
+            --red: #8a4a42;
+            --yellow: #b6a05d;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background:
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(37,35,31,0.025) 0px,
+                    rgba(37,35,31,0.025) 1px,
+                    transparent 1px,
+                    transparent 4px
+                ),
+                var(--paper);
+
+            color: var(--ink);
+            font-family: "Courier New", Courier, monospace;
+            min-height: 100vh;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            width: 100%;
+            height: 58px;
+            border-bottom: 3px solid var(--ink);
+            padding: 10px 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: var(--paper-dark);
+
+            position: relative;
+            z-index: 100;
+        }
+
+        .site-id {
+            font-size: 12px;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .discord-button {
+            text-decoration: none;
+            background: var(--ink);
+            color: var(--paper);
+
+            border: 2px solid var(--ink);
+
+            padding: 8px 13px;
+
+            font-family: "Courier New", Courier, monospace;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+
+            transition: 0.15s ease;
+        }
+
+        .discord-button:hover {
+            background: var(--white);
+            color: var(--ink);
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           MENU BUTTON
+        ========================= */
+
+        .menu-button {
+            position: fixed;
+            top: 10px;
+            right: 155px;
+
+            z-index: 1000;
+
+            background: var(--ink);
+            color: var(--paper);
+
+            border: 2px solid var(--ink);
+
+            padding: 8px 13px;
+
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.15s ease;
+        }
+
+        .menu-button:hover {
+            background: var(--white);
+            color: var(--ink);
+        }
+
+        .menu-button.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* =========================
+           MENU
+        ========================= */
+
+        .menu-overlay {
+            position: fixed;
+            inset: 0;
+
+            z-index: 900;
+
+            background: #c2b28e;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            opacity: 0;
+            visibility: hidden;
+
+            transition:
+                opacity 0.25s ease,
+                visibility 0.25s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .menu-inner {
+            width: 92%;
+            height: 82vh;
+
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+
+            position: relative;
+        }
+
+        .close-menu {
+            position: absolute;
+            right: 0;
+            top: -45px;
+
+            background: transparent;
+            color: var(--ink);
+
+            border: 1px solid var(--ink);
+
+            padding: 7px 11px;
+
+            font-family: "Courier New", Courier, monospace;
+            font-size: 10px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.15s ease;
+        }
+
+        .close-menu:hover {
+            background: var(--ink);
+            color: var(--paper);
+        }
+
+        .menu-top {
+            position: absolute;
+            left: 0;
+            top: -45px;
+
+            font-size: 10px;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .menu-folder {
+            height: 100%;
+            width: 13%;
+
+            min-width: 90px;
+            max-width: 170px;
+
+            border-left: 2px solid var(--ink);
+            border-right: 2px solid var(--ink);
+
+            text-decoration: none;
+            color: var(--ink);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+            overflow: hidden;
+
+            transition:
+                width 0.25s ease,
+                transform 0.25s ease,
+                filter 0.25s ease,
+                background 0.25s ease;
+
+            box-shadow:
+                -5px 0 0 rgba(37,35,31,0.08);
+        }
+
+        .menu-folder:nth-of-type(1) {
+            background: #d8c9a8;
+        }
+
+        .menu-folder:nth-of-type(2) {
+            background: #eee4cb;
+        }
+
+        .menu-folder:nth-of-type(3) {
+            background: #9d9d91;
+        }
+
+        .menu-folder:nth-of-type(4) {
+            background: #b69b78;
+        }
+
+        .menu-folder:nth-of-type(5) {
+            background: #e0cba7;
+        }
+
+        .menu-folder:nth-of-type(6) {
+            background: #78766d;
+            color: #eee4cb;
+        }
+
+        .menu-folder:nth-of-type(7) {
+            background: #a8a88d;
+        }
+
+        .menu-folder::before {
+            content: "";
+
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 55%;
+            height: 32px;
+
+            border-right: 2px solid var(--ink);
+            border-bottom: 2px solid var(--ink);
+
+            background: inherit;
+        }
+
+        .menu-folder::after {
+            content: "";
+
+            position: absolute;
+
+            width: 65%;
+            height: 1px;
+
+            background: currentColor;
+
+            opacity: 0.35;
+
+            bottom: 18%;
+            left: 17%;
+        }
+
+        .folder-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            height: 100%;
+            width: 100%;
+
+            position: relative;
+            z-index: 2;
+
+            transition: transform 0.25s ease;
+        }
+
+        .folder-number {
+            font-size: 9px;
+            letter-spacing: 2px;
+
+            position: absolute;
+            top: 55px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            white-space: nowrap;
+        }
+
+        .folder-name {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: clamp(25px, 3vw, 43px);
+
+            font-weight: bold;
+            letter-spacing: 2px;
+
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+
+            white-space: nowrap;
+
+            transition: 0.25s ease;
+        }
+
+        .folder-small {
+            position: absolute;
+
+            bottom: 45px;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            font-size: 8px;
+            letter-spacing: 1px;
+
+            white-space: nowrap;
+        }
+
+        .menu-folder:hover {
+            width: 21%;
+
+            transform: translateY(-10px);
+
+            filter: contrast(1.05);
+
+            z-index: 10;
+
+            box-shadow:
+                -8px 0 0 rgba(37,35,31,0.12),
+                8px 0 0 rgba(37,35,31,0.08);
+        }
+
+        .menu-folder:hover .folder-content {
+            transform: scale(1.04);
+        }
+
+        .menu-folder:hover .folder-name {
+            letter-spacing: 4px;
+        }
+
+        .menu-folder:hover::before {
+            height: 40px;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+            max-width: 1180px;
+            margin: auto;
+            padding: 70px 25px 90px;
+        }
+
+        /* =========================
+           PAGE HEADING
+        ========================= */
+
+        .page-heading {
+            border-bottom: 3px solid var(--ink);
+            padding-bottom: 25px;
+            margin-bottom: 45px;
+
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .heading-left h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(55px, 10vw, 125px);
+            line-height: 0.8;
+            letter-spacing: -5px;
+        }
+
+        .heading-left p {
+            margin-top: 20px;
+            max-width: 550px;
+
+            font-size: 12px;
+            line-height: 1.8;
+            color: var(--faded);
+        }
+
+        .archive-note {
+            border: 2px solid var(--ink);
+            padding: 14px;
+
+            width: 180px;
+
+            font-size: 9px;
+            line-height: 1.7;
+            text-transform: uppercase;
+
+            transform: rotate(1deg);
+        }
+
+        .archive-note strong {
+            display: block;
+            margin-bottom: 8px;
+
+            font-size: 10px;
+            color: var(--red);
+        }
+
+        /* =========================
+           FAQ INTRO
+        ========================= */
+
+        .faq-intro {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+
+            margin-bottom: 55px;
+        }
+
+        .intro-label {
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: var(--red);
+            font-weight: bold;
+        }
+
+        .intro-text {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(21px, 3vw, 34px);
+            line-height: 1.25;
+        }
+
+        /* =========================
+           QUESTIONS
+        ========================= */
+
+        .faq-section {
+            margin-bottom: 55px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            margin-bottom: 22px;
+
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .section-title::after {
+            content: "";
+            height: 1px;
+            background: var(--line);
+            flex: 1;
+        }
+
+        /* Large answer */
+
+        .faq-large {
+            border-top: 3px solid var(--ink);
+            border-bottom: 1px solid var(--line);
+
+            padding: 25px 0 30px;
+        }
+
+        .faq-large h2 {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: clamp(26px, 4vw, 45px);
+            line-height: 1.05;
+
+            max-width: 850px;
+        }
+
+        .faq-large p {
+            max-width: 800px;
+
+            margin-top: 18px;
+
+            font-size: 12px;
+            line-height: 1.9;
+            color: var(--faded);
+        }
+
+        /* Two columns */
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            border-top: 2px solid var(--ink);
+            border-bottom: 2px solid var(--ink);
+        }
+
+        .faq-item {
+            padding: 27px 25px 30px;
+
+            border-bottom: 1px solid var(--line);
+        }
+
+        .faq-item:nth-child(odd) {
+            border-right: 1px solid var(--line);
+        }
+
+        .faq-item h2 {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 25px;
+            line-height: 1.15;
+        }
+
+        .faq-item p {
+            margin-top: 15px;
+
+            font-size: 11px;
+            line-height: 1.85;
+
+            color: var(--faded);
+        }
+
+        /* =========================
+           SPECIAL NOTE
+        ========================= */
+
+        .field-note {
+            margin: 55px auto;
+
+            max-width: 850px;
+
+            border: 2px solid var(--ink);
+
+            padding: 30px 35px;
+
+            background: rgba(229,217,188,0.35);
+
+            transform: rotate(-0.4deg);
+        }
+
+        .field-note::before {
+            content: "FIELD NOTE / COMMUNITY RECORD";
+
+            display: block;
+
+            margin-bottom: 18px;
+
+            font-size: 9px;
+            letter-spacing: 2px;
+            font-weight: bold;
+
+            color: var(--red);
+        }
+
+        .field-note p {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 23px;
+            line-height: 1.45;
+        }
+
+        /* =========================
+           CONTACT LINKS
+        ========================= */
+
+        .contact-link {
+            color: var(--red);
+            font-weight: bold;
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
+        }
+
+        .contact-link:hover {
+            color: var(--ink);
+        }
+
+        /* =========================
+           FINAL SECTION
+        ========================= */
+
+        .final-question {
+            margin-top: 65px;
+
+            border-top: 3px solid var(--ink);
+
+            padding-top: 25px;
+        }
+
+        .final-question h2 {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: clamp(35px, 6vw, 75px);
+
+            line-height: 0.95;
+            max-width: 850px;
+        }
+
+        .final-question p {
+            margin-top: 20px;
+
+            max-width: 600px;
+
+            font-size: 11px;
+            line-height: 1.8;
+            color: var(--faded);
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            border-top: 3px solid var(--ink);
+
+            padding: 20px;
+
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+
+            font-size: 10px;
+            color: var(--faded);
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 750px) {
+
+            .menu-button {
+                right: 15px;
+            }
+
+            .page-heading {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .archive-note {
+                width: 100%;
+            }
+
+            .faq-intro {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-item:nth-child(odd) {
+                border-right: none;
+            }
+
+            .menu-folder {
+                min-width: 45px;
+            }
+
+            .folder-name {
+                font-size: 22px;
+            }
+
+            .folder-small,
+            .folder-number {
+                display: none;
+            }
+
+            main {
+                padding-top: 55px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            footer {
+                flex-direction: column;
+            }
+
+            .menu-inner {
+                width: 96%;
+                height: 70vh;
+            }
+
+            .menu-folder {
+                min-width: 35px;
+            }
+
+            .folder-name {
+                font-size: 17px;
+            }
+
+            .menu-top {
+                font-size: 8px;
+            }
+
+            .close-menu {
+                top: -38px;
+            }
+
+            .field-note {
+                padding: 25px;
+            }
+
+            .field-note p {
+                font-size: 19px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
+    <header>
+
+        <div class="site-id">
+            SILTVALE
+        </div>
+
+        <a
+            href="https://discord.gg/MQCfkwVxP5"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="discord-button">
+            JOIN DISCORD
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         MENU BUTTON
+    ========================= -->
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        onclick="openMenu()">
+
+        ☰ MENU
+
+    </button>
+
+
+    <!-- =========================
+         FULLSCREEN MENU
+    ========================= -->
+
+    <div class="menu-overlay" id="menuOverlay">
+
+        <div class="menu-inner">
+
+            <div class="menu-top">
+                SILTVALE / ARCHIVE / NAVIGATION
+            </div>
+
+            <button
+                class="close-menu"
+                onclick="closeMenu()">
+
+                × CLOSE
+
+            </button>
+
+
+            <a href="index.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        01
+                    </span>
+
+                    <span class="folder-name">
+                        HOME
+                    </span>
+
+                    <span class="folder-small">
+                        MAIN INDEX
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <a href="smp-info.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        02
+                    </span>
+
+                    <span class="folder-name">
+                        SMP INFO
+                    </span>
+
+                    <span class="folder-small">
+                        INFORMATION
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <a href="history.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        03
+                    </span>
+
+                    <span class="folder-name">
+                        HISTORY
+                    </span>
+
+                    <span class="folder-small">
+                        ARCHIVE
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <a href="apply.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        04
+                    </span>
+
+                    <span class="folder-name">
+                        APPLY
+                    </span>
+
+                    <span class="folder-small">
+                        APPLICATIONS
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <a href="faq.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        05
+                    </span>
+
+                    <span class="folder-name">
+                        FAQ
+                    </span>
+
+                    <span class="folder-small">
+                        QUESTIONS
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <a href="acknowledgements.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        06
+                    </span>
+
+                    <span class="folder-name">
+                        ACKNOWLEDGE
+                    </span>
+
+                    <span class="folder-small">
+                        CREDITS
+                    </span>
+
+                </div>
+
+            </a>
+
+
+            <a href="reviews.html" class="menu-folder">
+
+                <div class="folder-content">
+
+                    <span class="folder-number">
+                        07
+                    </span>
+
+                    <span class="folder-name">
+                        REVIEWS
+                    </span>
+
+                    <span class="folder-small">
+                        COMMUNITY
+                    </span>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================= -->
+
+    <main>
+
+
+        <!-- PAGE TITLE -->
+
+        <section class="page-heading">
+
+            <div class="heading-left">
+
+                <h1>
+                    FAQ
+                </h1>
+
+                <p>
+                    FREQUENTLY ASKED QUESTIONS / SILTVALE COMMUNITY ARCHIVE
+                </p>
+
+            </div>
+
+
+            <div class="archive-note">
+
+                <strong>
+                    READER'S NOTE
+                </strong>
+
+                If you're new to Siltvale,
+                this record should answer
+                most of the questions
+                you might have.
+
+            </div>
+
+        </section>
+
+
+        <!-- INTRO -->
+
+        <section class="faq-intro">
+
+            <div class="intro-label">
+                BEFORE YOU ENTER
+            </div>
+
+            <div class="intro-text">
+
+                Siltvale is a community-driven
+                world. There isn't one story
+                waiting for you to follow.
+
+                <br><br>
+
+                <em>
+                    You help create it.
+                </em>
+
+            </div>
+
+        </section>
+
+
+        <!-- GENERAL -->
+
+        <section class="faq-section">
+
+            <div class="section-title">
+                GENERAL QUESTIONS
+            </div>
+
+
+            <div class="faq-large">
+
+                <h2>
+                    When will Siltvale launch?
+                </h2>
+
+                <p>
+                    Siltvale is currently in development.
+                    An official launch date will be announced
+                    once we're confident everything is ready.
+                    Accepted players will receive the server
+                    IP before launch.
+                </p>
+
+            </div>
+
+
+            <div class="faq-grid">
+
+                <article class="faq-item">
+
+                    <h2>
+                        Are there main characters or antagonists?
+                    </h2>
+
+                    <p>
+                        No. Siltvale is a community-driven
+                        Minecraft server where players
+                        contribute to an evolving world
+                        through their characters, stories,
+                        and interactions.
+
+                        <br><br>
+
+                        It's up to you how you make your
+                        story matter.
+                    </p>
+
+                </article>
+
+
+                <article class="faq-item">
+
+                    <h2>
+                        Can I stream or make videos?
+                    </h2>
+
+                    <p>
+                        Yes! Content creation is encouraged.
+                        We love seeing players create videos,
+                        streams, screenshots, artwork, and
+                        other content inspired by Siltvale.
+                    </p>
+
+                </article>
+
+
+                <article class="faq-item">
+
+                    <h2>
+                        Do I need roleplay experience?
+                    </h2>
+
+                    <p>
+                        Not at all! Previous roleplay experience
+                        is helpful but not required.
+
+                        <br><br>
+
+                        We welcome both experienced and new
+                        roleplayers.
+                    </p>
+
+                </article>
+
+
+                <article class="faq-item">
+
+                    <h2>
+                        How will we communicate while roleplaying?
+                    </h2>
+
+                    <p>
+                        We use both VC and Minecraft chats
+                        depending on preference and availability.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- WORLD -->
+
+        <section class="faq-section">
+
+            <div class="section-title">
+                THE WORLD
+            </div>
+
+
+            <div class="faq-large">
+
+                <h2>
+                    What's the biome of Siltvale's setting?
+                    Is it fully dead?
+                </h2>
+
+                <p>
+                    Siltvale's settlements have the following
+                    biomes: Pale Biome, Dark Forest, Birch Forest,
+                    Old Growth Spruce Taiga, and a snowy mountain.
+
+                    <br><br>
+
+                    Therefore, Siltvale is not fully dead,
+                    considering it's been eons since the Plague
+                    and Apocalypse.
+                </p>
+
+            </div>
+
+
+            <div class="field-note">
+
+                <p>
+                    "We will start where most descendants
+                    first arrived at Siltvale."
+                </p>
+
+            </div>
+
+
+            <div class="faq-grid">
+
+                <article class="faq-item">
+
+                    <h2>
+                        Are races fully cosmetic?
+                    </h2>
+
+                    <p>
+                        There are exceptions, as long as the
+                        race is not used to make the OC
+                        overpowered or turn them into a
+                        "chosen one" type of character.
+                    </p>
+
+                </article>
+
+
+                <article class="faq-item">
+
+                    <h2>
+                        Where will the first RP session begin?
+                    </h2>
+
+                    <p>
+                        We will start where most descendants
+                        first arrived at Siltvale.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- GROUPS -->
+
+        <section class="faq-section">
+
+            <div class="section-title">
+                GROUPS & CIVILIZATIONS
+            </div>
+
+
+            <div class="faq-large">
+
+                <h2>
+                    Can players create their own groups?
+                </h2>
+
+                <p>
+                    For groups, what actually matters is
+                    the lore and background.
+
+                    <br><br>
+
+                    It depends on the situation. For example,
+                    a group could have originally disbanded and
+                    your OC decides to recruit people to make
+                    it active again.
+
+                    <br><br>
+
+                    Or it could simply be a group your OC
+                    decides to establish from scratch.
+                    Naturally, a recruitment post can then
+                    be made for it.
+                </p>
+
+            </div>
+
+
+            <div class="faq-grid">
+
+                <article class="faq-item">
+
+                    <h2>
+                        Will there be player-made civilizations
+                        and factions?
+                    </h2>
+
+                    <p>
+                        Since the theme is reclamation,
+                        the settlements where players can
+                        reside are already made.
+
+                        <br><br>
+
+                        Players can add their own builds there.
+                        Groups can also create their own bases.
+                    </p>
+
+                </article>
+
+
+                <article class="faq-item">
+
+                    <h2>
+                        How do the settlement roles work?
+                    </h2>
+
+                    <p>
+                        Settlements already exist as part of
+                        Siltvale's reclaimation theme.
+
+                        <br><br>
+
+                        Roles such as Settler, Drifter,
+                        Pathfinder and others help define
+                        how characters interact with the world.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ROLEPLAY -->
+
+        <section class="faq-section">
+
+            <div class="section-title">
+                ROLEPLAY
+            </div>
+
+
+            <div class="faq-large">
+
+                <h2>
+                    How does roleplay actually work?
+                    Is it instant?
+                </h2>
+
+                <p>
+                    As long as you're around people, yes.
+                    However, it's completely okay to be idle
+                    if you're by yourself.
+
+                    <br><br>
+
+                    Roleplay naturally happens around the
+                    people and situations you're interacting
+                    with.
+                </p>
+
+            </div>
+
+
+            <div class="faq-grid">
+
+                <article class="faq-item">
+
+                    <h2>
+                        Can I play multiple roles?
+                    </h2>
+
+                    <p>
+                        Yes! You can apply for multiple roles,
+                        such as lore writer, builder, moderator,
+                        and player at the same time.
+
+                        <br><br>
+
+                        We encourage it as long as you're up
+                        for the additional responsibility.
+                    </p>
+
+                </article>
+
+
+                <article class="faq-item">
+
+                    <h2>
+                        Will players be able to trade?
+                    </h2>
+
+                    <p>
+                        Yes.
+
+                        <br><br>
+
+                        What players trade for is their choice.
+                        For example, you could trade one item
+                        for another player's item that you need.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTACT -->
+
+        <section class="faq-section">
+
+            <div class="section-title">
+                NEED MORE HELP?
+            </div>
+
+
+            <div class="faq-large">
+
+                <h2>
+                    Who do I contact if I have questions?
+                </h2>
+
+                <p>
+
+                    Feel free to open a
+                    <a
+                        class="contact-link"
+                        href="https://discord.com/channels/1433549254215073854/1508602262925217923"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        Ticket
+                    </a>
+
+                    or contact a member of the
+                    <a
+                        class="contact-link"
+                        href="https://discord.com/channels/1433549254215073854/1521896503184986202"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        staff team
+                    </a>.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- FINAL -->
+
+        <section class="final-question">
+
+            <h2>
+                Still have a question?
+            </h2>
+
+            <p>
+                Siltvale is still being built.
+                Some answers will change as the world,
+                community, and story continue to develop.
+
+                <br><br>
+
+                If something isn't covered here,
+                ask the community.
+            </p>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <span>
+            © SILTVALE SMP
+        </span>
+
+        <span>
+            THIS SITE IS A COMMUNITY WEBSITE
+        </span>
+
+        <span>
+            SILTVALE
+        </span>
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        const menuOverlay =
+            document.getElementById("menuOverlay");
+
+        const menuButton =
+            document.getElementById("menuButton");
+
+
+        function openMenu() {
+
+            menuOverlay.classList.add("active");
+
+            menuButton.classList.add("hidden");
+
+            document.body.style.overflow = "hidden";
+
+        }
+
+
+        function closeMenu() {
+
+            menuOverlay.classList.remove("active");
+
+            menuButton.classList.remove("hidden");
+
+            document.body.style.overflow = "";
+
+        }
+
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Escape") {
+
+                    closeMenu();
+
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
